@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Palabras</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -19,8 +28,7 @@
         <div id="game-section" class="hidden">
             <h2 id="timer">Tiempo: 60</h2>
             <h2 id="currentWord"></h2>
-            <button onclick="markGuessed()" id="guessedBtn">✅ Acertada</button>
-            <button onclick="skipWord()" id="skipBtn">🔁 Siguiente palabra</button>
+            <button onclick="nextWord()" id="nextBtn">Siguiente palabra</button>
         </div>
     </div>
 
