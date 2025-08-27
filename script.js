@@ -6,6 +6,7 @@ let currentWord = '';
 let timer;
 let timeLeft = 60;
 let waitTime = 15;
+let rondaAcertadas = 0;
 
 function generateFields() {
     const numWords = parseInt(document.getElementById('numWords').value);
@@ -38,8 +39,11 @@ function startGame(event) {
 }
 
 function startRound() {
+    rondaAcertadas = 0;
     timeLeft = 60;
     document.getElementById('timer').textContent = `Tiempo: ${timeLeft}`;
+    document.getElementById('guessedBtn').disabled = false;
+    document.getElementById('skipBtn').disabled = false;
     nextWord();
 
     timer = setInterval(() => {
@@ -68,6 +72,7 @@ function nextWord() {
 function markGuessed() {
     remainingWords = remainingWords.filter(word => word !== currentWord);
     guessedWords.push(currentWord);
+    rondaAcertadas++;
     if (guessedWords.length === words.length) {
         clearInterval(timer);
         showEndGameButtons();
@@ -81,11 +86,17 @@ function skipWord() {
 }
 
 function endRound() {
+    document.getElementById('guessedBtn').disabled = true;
+    document.getElementById('skipBtn').disabled = true;
+
     let countdown = waitTime;
-    document.getElementById('currentWord').textContent = `⏱ Fin de la ronda. Siguiente ronda en ${countdown}...`;
+    document.getElementById('currentWord').textContent =
+        `⏱ Fin de la ronda. Acertaste ${rondaAcertadas} palabra(s). Siguiente ronda en ${countdown}...`;
+
     const interval = setInterval(() => {
         countdown--;
-        document.getElementById('currentWord').textContent = `⏱ Fin de la ronda. Siguiente ronda en ${countdown}...`;
+        document.getElementById('currentWord').textContent =
+            `⏱ Fin de la ronda. Acertaste ${rondaAcertadas} palabra(s). Siguiente ronda en ${countdown}...`;
         if (countdown === 0) {
             clearInterval(interval);
             startRound();
