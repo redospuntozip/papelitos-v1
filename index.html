@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Palabras</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Juego de Palabras</h1>
+        <div id="input-section">
+            <label for="numWords">Número de papeles:</label>
+            <input type="number" id="numWords" min="1">
+            <button onclick="generateFields()">Generar campos</button>
+            <form id="wordForm" onsubmit="startGame(event)"></form>
+        </div>
+
+        <div id="game-section" class="hidden">
+            <h2 id="timer">Tiempo: 60</h2>
+            <h2 id="currentWord"></h2>
+            <button onclick="nextWord()" id="nextBtn">Siguiente palabra</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
